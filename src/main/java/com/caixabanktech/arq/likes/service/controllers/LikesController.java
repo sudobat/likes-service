@@ -19,21 +19,30 @@ public class LikesController {
     @PostMapping
     public HttpEntity createLike(@RequestBody Like like) {
         tweetLikesService.tweetAddLike(like);
-        return new ResponseEntity<>("Hello World!", HttpStatus.CREATED);
+        return new ResponseEntity<>(HttpStatus.CREATED);
 
     }
 
     @PostMapping
     public HttpEntity dislike(@RequestBody Like like) {
         tweetLikesService.tweetRemoveLike(like);
-        return new ResponseEntity<>("Hello World!", HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
 
     }
 
     @DeleteMapping("/tweets/{tweetId}/likes")
     public HttpEntity deleteAllLikes(@PathVariable String tweetId) {
         tweetLikesService.tweetDeleteLikes(tweetId);
-        return new ResponseEntity<>("Hello World!", HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
 
     }
+
+    @GetMapping("/tweets/{tweetId}/likes/count")
+    public HttpEntity<Integer> countLikes(@PathVariable String tweetId) {
+
+        //tweetLikesService.count(tweetId);
+        return new ResponseEntity<>(0,HttpStatus.OK);
+
+    }
+
 }
