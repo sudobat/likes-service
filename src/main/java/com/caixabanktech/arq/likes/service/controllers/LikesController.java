@@ -1,14 +1,11 @@
 package com.caixabanktech.arq.likes.service.controllers;
 
-import com.caixabanktech.arq.likes.service.LikesServiceApplication;
 import com.caixabanktech.arq.likes.service.entities.Like;
 import com.caixabanktech.arq.likes.service.services.TweetLikesService;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.net.http.HttpResponse;
 
 @RestController
 public class LikesController {

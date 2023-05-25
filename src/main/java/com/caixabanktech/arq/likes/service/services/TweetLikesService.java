@@ -9,5 +9,7 @@ public interface TweetLikesService {
     public void tweetRemoveLike(Like like);
 
     public void tweetDeleteLikes(String tweetId);
+    
+    public int tweetGetNunLikes(String tweetId);
 
 }

@@ -30,4 +30,13 @@ public class TweetLikesServiceImpl implements TweetLikesService {
         throw new UnsupportedOperationException("Unimplemented method 'tweetDeleteLikes'");
     }
 
+    @Override
+    public int tweetGetNunLikes(String tweetId) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'tweetGetNunLikes'");
+    }
+
+
+
+
 }
