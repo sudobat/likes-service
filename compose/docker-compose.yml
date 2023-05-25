@@ -1,0 +1,16 @@
+version: '2.2'
+services:
+  redis:
+    image: redis:5.0
+    container_name: redis
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    ports:
+      - 6379:6379
+    networks:
+      - redis  
+networks:
+  redis:
+    driver: bridge
