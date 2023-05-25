@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class Like {
-    private String tweetID;
+    private String tweetId;
     private String author;
 }
