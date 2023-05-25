@@ -40,7 +40,7 @@ public class LikesController {
     @GetMapping("/tweets/{tweetId}/likes/count")
     public HttpEntity<Integer> countLikes(@PathVariable String tweetId) {
 
-        //tweetLikesService.count(tweetId);
+        tweetLikesService.tweetGetNumLikes(tweetId);
         return new ResponseEntity<>(0,HttpStatus.OK);
 
     }

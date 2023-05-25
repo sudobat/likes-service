@@ -10,6 +10,6 @@ public interface TweetLikesService {
 
     public void tweetDeleteLikes(String tweetId);
     
-    public int tweetGetNunLikes(String tweetId);
+    public int tweetGetNumLikes(String tweetId);
 
 }
