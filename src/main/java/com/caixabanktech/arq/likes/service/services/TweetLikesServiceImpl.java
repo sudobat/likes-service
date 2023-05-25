@@ -1,42 +1,55 @@
 package com.caixabanktech.arq.likes.service.services;
 
-import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.stereotype.Service;
 
 import com.caixabanktech.arq.likes.service.entities.Like;
 
+@Service
 public class TweetLikesServiceImpl implements TweetLikesService {
 
-    private JedisConnectionFactory theFactory;
+    private RedisTemplate redisRemplate;
 
-    public TweetLikesServiceImpl(JedisConnectionFactory theFactory) {
-        this.theFactory = theFactory;
+    @Autowired
+    public TweetLikesServiceImpl(RedisTemplate redisTemplate) {
+        this.redisRemplate = redisTemplate;
+    }
+
+    public RedisTemplate getRedisTemplate() {
+        return this.redisRemplate;
     }
 
     @Override
     public void tweetAddLike(Like like) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'tweetAddLike'");
+
+        getRedisTemplate().opsForHyperLogLog().add(extractedLikeKey(like.getTweetId()), like.getAuthor());
     }
 
     @Override
     public void tweetRemoveLike(Like like) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'tweetRemoveLike'");
+        getRedisTemplate().opsForHyperLogLog().add(extractedDislikeKey(like.getTweetId()), like.getAuthor());
     }
 
     @Override
     public void tweetDeleteLikes(String tweetId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'tweetDeleteLikes'");
+
+        getRedisTemplate().opsForHyperLogLog().delete(tweetId + "_LIKE");
+        getRedisTemplate().opsForHyperLogLog().delete(tweetId + "_DISLIKE");
     }
 
     @Override
     public int tweetGetNunLikes(String tweetId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'tweetGetNunLikes'");
+        return getRedisTemplate().opsForHyperLogLog().size(extractedLikeKey(tweetId)).intValue();
+        
+
     }
 
+    private String extractedLikeKey(String id) {
+        return id + "_LIKE";
+    }
 
-
-
+    private String extractedDislikeKey(String id) {
+        return id + "_DISLIKE";
+    }
 }
