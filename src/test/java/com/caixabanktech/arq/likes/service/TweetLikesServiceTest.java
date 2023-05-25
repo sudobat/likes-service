@@ -51,7 +51,7 @@ public class TweetLikesServiceTest {
     public void test_tweetGetNunLikes()  {
         
         
-        this.tweetLikesService.tweetGetNunLikes("id0001");
+        this.tweetLikesService.tweetGetNumLikes("id0001");
     }
 
 }

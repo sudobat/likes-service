@@ -31,7 +31,7 @@ public class TweetLikesServiceImpl implements TweetLikesService {
     }
 
     @Override
-    public int tweetGetNunLikes(String tweetId) {
+    public int tweetGetNumLikes(String tweetId) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'tweetGetNunLikes'");
     }
