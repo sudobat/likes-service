@@ -3,6 +3,7 @@ package com.caixabanktech.arq.likes.service.config;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -11,20 +12,15 @@ import org.springframework.data.redis.core.RedisTemplate;
 public class TweetLikesConfig {
 
     @Value("${spring.data.redis.host:localhost}")
-    private String redisHost;
-    @Bean
     public JedisConnectionFactory jedisConnectionFactory() {
-        JedisConnectionFactory jedisConFactory = new JedisConnectionFactory(
-                new RedisStandaloneConfiguration(redisHost, 6379));
-
+        JedisConnectionFactory jedisConFactory = new JedisConnectionFactory();
         return jedisConFactory;
-
     }
 
     @Bean
-    public RedisTemplate<String, Object> redisTemplate() {
+    public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory redisConnectionFactory) {
         RedisTemplate<String, Object> template = new RedisTemplate<>();
-        template.setConnectionFactory(jedisConnectionFactory());
+        template.setConnectionFactory(redisConnectionFactory);
         return template;
     }
 }
