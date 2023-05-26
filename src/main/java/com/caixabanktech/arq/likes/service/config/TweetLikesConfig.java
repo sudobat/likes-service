@@ -1,5 +1,6 @@
 package com.caixabanktech.arq.likes.service.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
@@ -9,10 +10,12 @@ import org.springframework.data.redis.core.RedisTemplate;
 @Configuration
 public class TweetLikesConfig {
 
+    @Value("${spring.data.redis.host:localhost}")
+    private String redisHost;
     @Bean
     public JedisConnectionFactory jedisConnectionFactory() {
         JedisConnectionFactory jedisConFactory = new JedisConnectionFactory(
-                new RedisStandaloneConfiguration("localhost", 6379));
+                new RedisStandaloneConfiguration(redisHost, 6379));
 
         return jedisConFactory;
 
