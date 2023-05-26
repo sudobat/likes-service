@@ -1,5 +1,6 @@
 package com.caixabanktech.arq.likes.service.controllers;
 
+import com.caixabanktech.arq.likes.service.entities.CountLikes;
 import com.caixabanktech.arq.likes.service.entities.Like;
 import com.caixabanktech.arq.likes.service.services.TweetLikesService;
 import org.springframework.http.HttpEntity;
@@ -38,10 +39,10 @@ public class LikesController {
     }
 
     @GetMapping("/tweets/{tweetId}/likes/count")
-    public HttpEntity<Integer> countLikes(@PathVariable String tweetId) {
+    public HttpEntity<CountLikes> countLikes(@PathVariable String tweetId) {
 
-        tweetLikesService.tweetGetNumLikes(tweetId);
-        return new ResponseEntity<>(0,HttpStatus.OK);
+        int countLikes = tweetLikesService.tweetGetNumLikes(tweetId);
+        return new ResponseEntity<>(new CountLikes(Long.valueOf(countLikes)), HttpStatus.OK);
 
     }
 
