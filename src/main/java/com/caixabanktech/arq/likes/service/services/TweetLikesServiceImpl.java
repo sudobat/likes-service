@@ -40,9 +40,9 @@ public class TweetLikesServiceImpl implements TweetLikesService {
 
     @Override
     public int tweetGetNumLikes(String tweetId) {
-        return getRedisTemplate().opsForHyperLogLog().size(extractedLikeKey(tweetId)).intValue();
-        
-
+        int numLikes = getRedisTemplate().opsForHyperLogLog().size(extractedLikeKey(tweetId)).intValue();
+        int numDislikes = getRedisTemplate().opsForHyperLogLog().size(extractedDislikeKey(tweetId)).intValue();
+        return numLikes - numDislikes;
     }
 
     private String extractedLikeKey(String id) {
