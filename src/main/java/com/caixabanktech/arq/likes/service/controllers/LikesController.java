@@ -17,14 +17,14 @@ public class LikesController {
         this.tweetLikesService = tweetLikesService;
     }
 
-    @PostMapping("/like")
+    @PostMapping("/likes")
     public HttpEntity createLike(@RequestBody Like like) {
         tweetLikesService.tweetAddLike(like);
         return new ResponseEntity<>(HttpStatus.CREATED);
 
     }
 
-    @PostMapping("/dislike")
+    @PostMapping("/likes/dislike")
     public HttpEntity dislike(@RequestBody Like like) {
         tweetLikesService.tweetRemoveLike(like);
         return new ResponseEntity<>(HttpStatus.OK);
